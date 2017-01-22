@@ -87,6 +87,7 @@ public class BackgroundManager : MonoBehaviour {
         }
     }
 
+    /*
     IEnumerator propSpawning()
     {
         while (currentState == BackgroundState.hell)
@@ -94,5 +95,5 @@ public class BackgroundManager : MonoBehaviour {
 
             yield return new WaitForEndOfFrame();
         }
-    }
+    }*/
 }
