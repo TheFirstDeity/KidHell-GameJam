@@ -57,7 +57,8 @@ public class CharacterMovement : MonoBehaviour
                 //Debug.Log("right");
                 moveRight();
             }
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) && jumpState != JumpState.SingleJump)
             {
                 //Debug.Log("jump");
                 jump();
@@ -82,6 +83,7 @@ public class CharacterMovement : MonoBehaviour
         rch = Physics2D.Linecast(transform.position + (transform.right * 0.25f), transform.position - (transform.up * 1.05f) + (transform.right * 0.25f), 1);
         if (rch.collider != null)
         {
+            //Debug.Log(rch.collider.name);
             return true;
         }
 
@@ -134,10 +136,14 @@ public class CharacterMovement : MonoBehaviour
             case JumpState.Ground:
                 jumpState = JumpState.SingleJump;
                 rigidBody.AddForce(movementVector);
+
+                AudioManagerr.playAudioClip(3);
                 break;
             case JumpState.SingleJump:
                 jumpState = JumpState.DoubleJump;
                 rigidBody.AddForce(movementVector);
+
+                AudioManagerr.playAudioClip(3);
                 break;
             case JumpState.DoubleJump:
             default:
