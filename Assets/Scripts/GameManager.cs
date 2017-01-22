@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public Camera camera;
+    public Camera cam;
     public GameObject shelf;
     public GameObject lastLevel;
     public RoomScrolling roomScrolling;
@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour {
 
     public GameObject firstStageObjects;
     public GameObject secondStageObjects;
-    public GameObject thirdstageObjects;
 
     public GameObject cookie;
 
@@ -62,9 +61,11 @@ public class GameManager : MonoBehaviour {
             isPlayerAlive = true;
             player.transform.position = lastSavePos;
             player.GetComponent<CharacterHealth>().resetPlayer();
-
-            camera.setToLastSavePoint(lastSavePos);
+            cam.setToLastSavePoint(lastSavePos);
             roomScrolling.setLastSavePoint(lastSavePos);
+
+            PanelManager.hideText();
+            RetryManager.hideRetry();
         }
     }
 
@@ -108,6 +109,9 @@ public class GameManager : MonoBehaviour {
         PanelManager.hideText();
         //RoomScrolling.isScrolling = true;
         gameManager.startedGame = true;
+
+        AudioManagerr.playAudioClip(0);
+
     }
 
     public static void endingShift()
