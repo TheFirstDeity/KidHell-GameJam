@@ -6,8 +6,9 @@ public class Fireplace : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("1");
         Destroy(collider.gameObject);
         GetComponent<ParticleSystem>().Play();
+
+        PanelManager.setAndDisplayText("Well thats the way the cookie crumbles...");
     }
 }

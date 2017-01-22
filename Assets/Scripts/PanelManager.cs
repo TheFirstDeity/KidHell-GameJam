@@ -28,8 +28,8 @@ public class PanelManager : MonoBehaviour {
 	
     public static void setAndDisplayText(string text)
     {
-        pm.GetComponent<Text>().text = text;
         pm.canvas.enabled = true;
+        pm.GetComponentInChildren<Text>().text = text;
     }
 
     public static void hideText()
