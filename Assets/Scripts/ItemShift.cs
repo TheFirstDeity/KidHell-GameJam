@@ -21,6 +21,6 @@ public class ItemShift : MonoBehaviour {
             transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
             yield return new WaitForEndOfFrame();
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
