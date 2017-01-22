@@ -33,7 +33,7 @@ public class CharacterHealth : MonoBehaviour {
             anim.SetBool("Dying", true);
             //GetComponentInChildren<ParticleSystem>().Play();
             GameManager.playerDied();
-
+          
             AudioManagerr.playAudioClip(2);
 
             RetryManager.displayRetry();

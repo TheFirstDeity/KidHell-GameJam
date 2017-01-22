@@ -36,6 +36,7 @@ public class AudioManagerr : MonoBehaviour
         {
             audioSourcess[i] = gameObject.AddComponent<AudioSource>();
         }
+
         //source 0 is music loop
         audioSourcess[0].loop = true;
         audioSourcess[0].volume = 0.2f;

@@ -57,6 +57,7 @@ public class CharacterMovement : MonoBehaviour
                 //Debug.Log("right");
                 moveRight();
             }
+            
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) && jumpState != JumpState.SingleJump)
             {
                 //Debug.Log("jump");
@@ -76,7 +77,6 @@ public class CharacterMovement : MonoBehaviour
         rch = Physics2D.Linecast(transform.position - (transform.right * 0.25f), transform.position - (transform.up * 1.05f) - (transform.right * 0.25f), 1);
         if (rch.collider != null)
         {
-            //Debug.Log(rch.collider.name);
             return true;
         }
 

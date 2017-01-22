@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour {
 
     public GameObject firstStageObjects;
     public GameObject secondStageObjects;
-    //public GameObject thirdstageObjects;
 
     public GameObject cookie;
 
@@ -62,7 +61,6 @@ public class GameManager : MonoBehaviour {
             isPlayerAlive = true;
             player.transform.position = lastSavePos;
             player.GetComponent<CharacterHealth>().resetPlayer();
-
             cam.setToLastSavePoint(lastSavePos);
             roomScrolling.setLastSavePoint(lastSavePos);
 
@@ -113,6 +111,7 @@ public class GameManager : MonoBehaviour {
         gameManager.startedGame = true;
 
         AudioManagerr.playAudioClip(0);
+
     }
 
     public static void endingShift()
