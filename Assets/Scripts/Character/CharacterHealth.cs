@@ -14,13 +14,15 @@ public class CharacterHealth : MonoBehaviour {
         health = 1;
         anim = GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+    
+    public void resetPlayer()
+    {
+        health = 1;
+        anim.SetBool("Dying", false);
+    }
 
-	}
-
-    void OnCollisionEnter2D (Collision2D collision) {
+    void OnCollisionEnter2D (Collision2D collision)
+    {
         if (collision.gameObject.tag.Equals("DeathObject")) {
             Debug.Log ("hit");
             health--;
@@ -29,7 +31,8 @@ public class CharacterHealth : MonoBehaviour {
             //show bood spill animation
             Debug.Log("dead");
             anim.SetBool("Dying", true);
-            GetComponentInChildren<ParticleSystem>().Play();
+            //GetComponentInChildren<ParticleSystem>().Play();
+            GameManager.playerDied();
         }
     }
 }
