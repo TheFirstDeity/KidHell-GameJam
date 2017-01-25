@@ -9,6 +9,6 @@ public class Fireplace : MonoBehaviour {
         Destroy(collider.gameObject);
         GetComponent<ParticleSystem>().Play();
 
-        PanelManager.setAndDisplayText("Well thats the way the cookie crumbles...");
+        PanelManager.setAndDisplayText("Next time I'll get that cookie...");
     }
 }
