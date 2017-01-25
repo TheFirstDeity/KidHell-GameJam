@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour {
 
+    public Camera camera;
+
     public GameObject normalBackgroundGO;
     public GameObject hellBackgroundGO;
 
@@ -26,7 +28,7 @@ public class BackgroundManager : MonoBehaviour {
         else
         {
             Destroy(this);
-        }
+        }   
     }
 
 	// Use this for initialization
@@ -49,6 +51,7 @@ public class BackgroundManager : MonoBehaviour {
             switch(bgState)
             {
                 case BackgroundState.normal:
+                    normalBackgroundGO.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y);
                     while (hellSR.color.a > 0)
                     {
                         //decrease hell alpha
@@ -62,6 +65,7 @@ public class BackgroundManager : MonoBehaviour {
 
                         yield return new WaitForEndOfFrame();
                     }
+                    currentState = bgState;
                     break;
                 case BackgroundState.hell:
                     while (normalSR.color.a > 0)
@@ -77,11 +81,13 @@ public class BackgroundManager : MonoBehaviour {
 
                         yield return new WaitForEndOfFrame();
                     }
+                    currentState = bgState;
                     break;
             }
         }
     }
 
+    /*
     IEnumerator propSpawning()
     {
         while (currentState == BackgroundState.hell)
@@ -89,5 +95,5 @@ public class BackgroundManager : MonoBehaviour {
 
             yield return new WaitForEndOfFrame();
         }
-    }
+    }*/
 }

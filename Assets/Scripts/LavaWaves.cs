@@ -46,6 +46,20 @@ public class LavaWaves : MonoBehaviour {
     private Material meshMaterial;
     private float meshXOffset;
 
+    public static LavaWaves lavaWaves;
+
+    private void Awake()
+    {
+        if (lavaWaves == null)
+        {
+            lavaWaves = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     // Use this for initialization
     void Start () {
         meshFilter = gameObject.AddComponent<MeshFilter>();
@@ -83,6 +97,11 @@ public class LavaWaves : MonoBehaviour {
         StartCoroutine(moveUpwards());
 	}
 
+    public static GameObject getGameObj()
+    {
+        return lavaWaves.gameObject;
+    }
+
     IEnumerator moveUpwards()
     {
         float destY = transform.position.y + lavaIncreaseAfterStart;
@@ -92,9 +111,9 @@ public class LavaWaves : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if (originalHeight != transform.position.y)
         {
             originalHeight = transform.position.y;

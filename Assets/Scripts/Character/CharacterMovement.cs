@@ -41,24 +41,28 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (groundedCheck())
+        if (GameManager.isPlayerAlive)
         {
-            jumpState = JumpState.Ground;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            //Debug.Log("left");
-            moveLeft();
-        }
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-            //Debug.Log("right");
-            moveRight();
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-        {
-            //Debug.Log("jump");
-            jump();
+            if (groundedCheck())
+            {
+                jumpState = JumpState.Ground;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                //Debug.Log("left");
+                moveLeft();
+            }
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                //Debug.Log("right");
+                moveRight();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) && jumpState != JumpState.SingleJump)
+            {
+                //Debug.Log("jump");
+                jump();
+            }
         }
 
         if (rigidBody.velocity == Vector2.zero)
@@ -70,13 +74,19 @@ public class CharacterMovement : MonoBehaviour
     bool groundedCheck()
     {
         RaycastHit2D rch;
-        rch = Physics2D.Linecast(transform.position, transform.position - (transform.up * 1.1f), 1);
-        //Debug.DrawLine(transform.position, transform.position - (transform.up * 1.1f));
-
+        rch = Physics2D.Linecast(transform.position - (transform.right * 0.25f), transform.position - (transform.up * 1.05f) - (transform.right * 0.25f), 1);
         if (rch.collider != null)
         {
             return true;
         }
+
+        rch = Physics2D.Linecast(transform.position + (transform.right * 0.25f), transform.position - (transform.up * 1.05f) + (transform.right * 0.25f), 1);
+        if (rch.collider != null)
+        {
+            //Debug.Log(rch.collider.name);
+            return true;
+        }
+
         return false;
     }
 
@@ -88,7 +98,7 @@ public class CharacterMovement : MonoBehaviour
         //orient player to the direction of movement
         if (isFacingRight)
         {
-            spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             isFacingRight = false;
         }
         if (rigidBody.velocity.x < -maxMoveVelocity)
@@ -107,7 +117,7 @@ public class CharacterMovement : MonoBehaviour
         //orient player to the direction of movement
         if (!isFacingRight)
         {
-            spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             isFacingRight = true;
         }
         if (rigidBody.velocity.x > maxMoveVelocity)
@@ -126,10 +136,14 @@ public class CharacterMovement : MonoBehaviour
             case JumpState.Ground:
                 jumpState = JumpState.SingleJump;
                 rigidBody.AddForce(movementVector);
+
+                AudioManagerr.playAudioClip(3);
                 break;
             case JumpState.SingleJump:
                 jumpState = JumpState.DoubleJump;
                 rigidBody.AddForce(movementVector);
+
+                AudioManagerr.playAudioClip(3);
                 break;
             case JumpState.DoubleJump:
             default:

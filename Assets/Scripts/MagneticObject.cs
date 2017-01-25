@@ -44,7 +44,7 @@ public class MagneticObject : MonoBehaviour {
         while (playerRigidbody != null)
         {
             playerRigidbody.AddForce(-(collider.transform.position - transform.position) * forceAmount);
-            Debug.Log(-(collider.transform.position - transform.position));
+            //Debug.Log(-(collider.transform.position - transform.position));
             yield return new WaitForSeconds(forceApplyFrequency);
         }
         isApplyingForce = false;

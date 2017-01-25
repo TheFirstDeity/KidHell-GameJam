@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 114611669834263506}
   - component: {fileID: 95056689184390856}
   - component: {fileID: 212479411666943158}
-  m_Layer: 0
+  - component: {fileID: 114780125776156168}
+  m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,8 +62,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &61599810870758880
 BoxCollider2D:
@@ -75,9 +76,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.016145945, y: -0.05}
+  m_Offset: {x: 0.015098691, y: -0.050000012}
   serializedVersion: 2
-  m_Size: {x: 0.16687036, y: 0.3981086}
+  m_Size: {x: 0.16896465, y: 0.3981086}
 --- !u!95 &95056689184390856
 Animator:
   serializedVersion: 3
@@ -107,8 +108,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 20
-  jumpForce: 2
+  jumpForce: 1
   maxJumpVelocity: 3
+  maxMoveVelocity: 5
+--- !u!114 &114780125776156168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360431435750770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48d3028bc200474684e4e923be29f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
 --- !u!212 &212479411666943158
 SpriteRenderer:
   m_ObjectHideFlags: 1
